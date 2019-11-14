@@ -2,7 +2,7 @@
 require 'sinatra/base'
 
 require_relative 'helpers'
-require_relative 'route_concept'
+require_relative 'route_client'
 require_relative 'route_dir'
 require_relative 'route_file'
 require_relative 'formatter/concept_haml_formatter'
@@ -19,7 +19,7 @@ class Service < Sinatra::Base
   set :public_folder, File.join( File.dirname(__FILE__), "public")
 
   helpers  Sinatra::Service::Helpers
-  register Sinatra::Service::RouteConcept
+  register Sinatra::Service::RouteClient
   register Sinatra::Service::RouteDir
   register Sinatra::Service::RouteFile
 

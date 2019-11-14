@@ -2,9 +2,11 @@
 # Sintatra.SinatraFrontEnd.Helpers
 module Sinatra
   module Service
+    ##
+    # Sinatra TeutonWeb helpers
     module Helpers
 
-      BASEDIR = Dir.pwd
+      BASEDIR = Dir.pwd # Base directory
 
       def route_for(path)
         s = BASEDIR.size + 1
@@ -20,18 +22,11 @@ module Sinatra
       end
 
       def html_for_current( option={ :indexlast => false} )
-#        items=@current.split(File::SEPARATOR)
-#        items.delete(".")
-#        items.delete("..")
-#        items.delete(BASEDIR)
         output = "<a href=\"/dir/list\">Home</a>"
         relative_path = route_for @current
         return output if relative_path.nil?
 
         items = relative_path.split(File::SEPARATOR)
-
-        #binding.pry if option[:indexlast] == true
-
         before = ""
         items.each do |i|
           if i==items.last and option[:indexlast]==false then
