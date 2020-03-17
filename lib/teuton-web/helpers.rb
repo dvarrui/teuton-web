@@ -48,13 +48,13 @@ module Sinatra
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand"   href="/">ASKER</a>
+          <a class="navbar-brand"   href="/">TEUTON</a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
             <li class="active"><a href="/">Home</a></li>
-            <li><a href="https://github.com/dvarrui/asker">GitHub</a></li>
-            <li><a href="https://github.com/dvarrui/asker/blob/master/README.md">About</a></li>
+            <li><a href="https://github.com/teuton-software/teuton">GitHub</a></li>
+            <li><a href="https://github.com/teuton-software/teuton/blob/master/README.md">About</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       DIV
