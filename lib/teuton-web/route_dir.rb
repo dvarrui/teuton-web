@@ -17,7 +17,7 @@ module Sinatra
         end
 
         app.get '/dir/create/*' do
-          @current=File.join( Project.instance.inputbasedir, params[:splat] )
+          @current=File.join(Dir.pwd, params[:splat] )
           Builder::create_dir(@current)
           load_dir @current
           erb :"dir/list"
