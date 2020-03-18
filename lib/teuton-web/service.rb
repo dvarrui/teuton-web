@@ -24,7 +24,8 @@ class Service < Sinatra::Base
   register Sinatra::Service::RouteFile
 
   get '/' do
-    redirect '/dir/list'
+    # redirect '/dir/list'
+    erb :'/index/settings'
   end
 
   def load_dir(dir)
