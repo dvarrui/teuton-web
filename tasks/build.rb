@@ -9,16 +9,16 @@ namespace :build do
 
   desc 'Build gem'
   task :gem do
-    puts "[ INFO ] Building gem..."
+    puts '[ INFO ] Building gem...'
     system('rm teuton-web-*.*.*.gem')
     system('gem build teuton-web.gemspec')
   end
 
   desc 'Build docs'
   task :docs do
-    puts "[ INFO ] Generating documentation..."
+    puts '[ INFO ] Generating documentation...'
     system('rm -r html/')
     system('yardoc lib/* -o html --files LICENSE.txt' +
-           Dir.glob(File.join('docs','**','*.md')).join(',') )
+           Dir.glob(File.join('docs', '**', '*.md')).join(','))
   end
 end

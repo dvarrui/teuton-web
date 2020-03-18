@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+##
+# Utils functions
 module Utils
   def self.gems
     %w[sinatra minitest yard rubocop]
@@ -16,8 +18,8 @@ module Utils
     b = a.select { |i| i.include? '_test' }
     d = File.join('.', 'tests', '**', '*_test.rb')
     e = Dir.glob(d)
-    puts "[ FAIL ] Some ruby tests are not executed by" +
-         "#{testfile}" unless b.size == e.size
+    puts "[ FAIL ] Some ruby tests are not executed by #{testfile}" \
+         unless b.size == e.size
     puts "[ INFO ] Running #{testfile}"
     system(testfile)
   end
@@ -30,10 +32,10 @@ module Utils
     fails
   end
 
-  def self.install_gems list
+  def self.install_gems(list)
     fails = filter_uninstalled_gems(list)
     if !fails.empty?
-      puts "[ INFO ] Installing gems..."
+      puts '[ INFO ] Installing gems...'
       fails.each do |name|
         system("gem install #{name}")
       end
