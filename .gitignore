@@ -1,3 +1,4 @@
 html
-*.gem
 .yardoc
+*.devel
+*.gem
