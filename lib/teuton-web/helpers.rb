@@ -53,7 +53,10 @@ module Sinatra
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="/">Mode</a></li>
+        DIV
+
+        text += '<li class="active"><a href="/">Mode: ' + @mode.to_s+ '</a></li>'
+        text += <<-DIV
             <li><a href="https://github.com/teuton-software/teuton">GitHub</a></li>
             <li><a href="https://github.com/teuton-software/teuton/blob/master/README.md">Documentation</a></li>
           </ul>
