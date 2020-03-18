@@ -15,7 +15,7 @@ module Sinatra
       end
 
       def remove_basedir(dir)
-        items=@current.split(File::SEPARATOR)
+        items = @current.split(File::SEPARATOR)
         items.delete(".")
         items.delete("..")
         items.delete(BASEDIR)
