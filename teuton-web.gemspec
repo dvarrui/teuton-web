@@ -3,7 +3,7 @@ require_relative 'lib/teuton-web/application'
 Gem::Specification.new do |s|
   s.name        = Application::NAME
   s.version     = Application::VERSION
-  s.date        = '2019-11-14'
+  s.date        = '2020-03-18'
   s.summary     = "TeutonWeb UNDER CONSTRUCTION!"
   s.description = <<-EOF
   TeutonWeb (Teuton Software project).
@@ -22,6 +22,6 @@ Gem::Specification.new do |s|
                   Dir.glob(File.join('docs','**','*.md'))
 
   s.add_runtime_dependency 'sinatra', '~> 2.0'
-  s.add_runtime_dependency 'thor', '~> 0.20'
+
   s.add_development_dependency 'minitest', '~> 5.11'
 end

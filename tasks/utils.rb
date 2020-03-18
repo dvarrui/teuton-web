@@ -2,7 +2,7 @@
 
 module Utils
   def self.gems
-    %w[sinatra minitest]
+    %w[sinatra minitest yard rubocop]
   end
 
   def self.check_gems(gems)
