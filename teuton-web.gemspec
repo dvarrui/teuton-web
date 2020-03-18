@@ -1,8 +1,8 @@
 require_relative 'lib/teuton-web/application'
 
 Gem::Specification.new do |s|
-  s.name        = Application::NAME
-  s.version     = Application::VERSION
+  s.name        = TeutonWeb::Application::NAME
+  s.version     = TeutonWeb::Application::VERSION
   s.date        = '2020-03-18'
   s.summary     = "TeutonWeb UNDER CONSTRUCTION!"
   s.description = <<-EOF

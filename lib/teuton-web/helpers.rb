@@ -1,5 +1,6 @@
 
-# Sintatra.SinatraFrontEnd.Helpers
+##
+# Sinatra.Service.Helpers
 module Sinatra
   module Service
     ##
@@ -40,7 +41,7 @@ module Sinatra
       end
 
       def html_for_navbar
-        text= <<-DIV
+        text = <<-DIV
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
             <span class="sr-only">Toggle navigation</span>
@@ -52,13 +53,13 @@ module Sinatra
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="/">Home</a></li>
+            <li class="active"><a href="/">Mode</a></li>
             <li><a href="https://github.com/teuton-software/teuton">GitHub</a></li>
             <li><a href="https://github.com/teuton-software/teuton/blob/master/README.md">Documentation</a></li>
           </ul>
-        </div><!--/.nav-collapse -->
-      DIV
-      return text
+        </div> <!--/.nav-collapse -->
+        DIV
+        return text
       end
 
     end
