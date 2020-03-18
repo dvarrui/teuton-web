@@ -57,7 +57,7 @@ module Sinatra
           <ul class="nav navbar-nav">
         DIV
 
-        text += '<li class="active"><a href="/">Mode: ' + @mode.to_s+ '</a></li>'
+        text += '<li class="active"><a href="/' + @mode.to_s.downcase + '">Mode: ' + @mode.to_s+ '</a></li>'
         text += '<li><a href="https://github.com/teuton-software/teuton">GitHub</a></li>'
         text += '<li><a href="https://github.com/teuton-software/teuton/blob/master/README.md">Documentation '
         text += '(' + TeutonWeb::Application::VERSION + ')</a></li>'

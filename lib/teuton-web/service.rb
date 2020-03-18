@@ -31,6 +31,10 @@ class Service < Sinatra::Base
     erb :'/index/choose'
   end
 
+  get '/choose' do
+    redirect '/'
+  end
+
   def load_dir(dir)
     @filenames = Dir[dir + "/**"].sort!
   end
