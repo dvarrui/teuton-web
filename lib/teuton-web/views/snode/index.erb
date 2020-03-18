@@ -5,32 +5,43 @@
 </div>
 
 <div class="row">
-  <div class="col-sm-6">
+  <div class="col-sm-8">
     <div class="panel panel-primary">
       <div class="panel-heading">
-        <h3 class="panel-title">Report files <span class="badge"><%= @filenames.size.to_s%></span></h3>
+        <h3 class="panel-title">Report files <span class="badge"><%= @list.size.to_s%></span></h3>
       </div>
       <div class="panel-body">
 <!--             <div class="col-md-6">-->
         <table class="table table-condensed">
           <thead>
             <tr>
-              <td><span class="label label-default">ID</span></td>
               <td><span class="label label-default">Filename</span></td>
               <td><span class="label label-default">Grade</span></td>
+              <td><span class="label label-default">Details</span></td>
+              <td><span class="label label-default">Timestamp</span></td>
             </tr>
           </thead>
           <tbody>
-            <% @filenames.each_with_index do |filepath, index| %>
+            <% @list.each do |item| %>
               <tr>
-              <% filename = File.basename(filepath) %>
-              <% if filename.start_with? 'case-' %>
-                <td><%= (index+1) %></td>
-                <td><a href="/snode/report/raw/<%=filename%>"><b><%=filename%></b></a></td>
-                <td><span class="label label-danger">Unkown</span></td>
+              <% if item[:link] %>
+                <td>
+                  <a href="/snode/report/raw/<%=item[:filename]%>">
+                    <b><%=item[:filename]%></b></a>
+                </td>
+                <td><span class="badge"><%=item[:grade]%></span></td>
+                <% if item[:show] %>
+                  <td><a href="/snode/report/show/<%=item[:filename]%>">
+                    <span class="label label-primary">Show</span></a>
+                  </td>
+                <% else %>
+                  <td></td>
+                <% end %>
+                <td><%= item[:timestamp] %></td>
               <% else %>
-                <td><%= (index+1) %></td>
-                <td><%= filename %></td>
+                <td><%= item[:filename] %></td>
+                <td></td>
+                <td></td>
                 <td></td>
               <% end %>
               </tr>
@@ -41,21 +52,5 @@
 
       </div>
     </div>
-  </div><!-- /.col-sm-4 -->
-
-  <div class="col-sm-6">
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h3 class="panel-title">Settings</h3>
-      </div>
-      <div class="panel-body">
-<!--    <div class="col-md-6">-->
-        <ul>
-          <li>Teuton-client</li>
-        </ul>
-<!--    </div>-->
-      </div>
-    </div>
-
-  </div><!-- /.col-sm-4 -->
+  </div>
 </div>
