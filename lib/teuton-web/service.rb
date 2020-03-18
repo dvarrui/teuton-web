@@ -6,6 +6,7 @@ require_relative 'helpers'
 require_relative 'route/route_client'
 require_relative 'route/route_dir'
 require_relative 'route/route_file'
+require_relative 'route/route_snode'
 require_relative 'formatter/concept_haml_formatter'
 
 # SinatraFrontEnd class:
@@ -23,6 +24,7 @@ class Service < Sinatra::Base
   register Sinatra::Service::RouteClient
   register Sinatra::Service::RouteDir
   register Sinatra::Service::RouteFile
+  register Sinatra::Service::RouteSnode
 
   get '/' do
     @mode = :choose
@@ -30,7 +32,7 @@ class Service < Sinatra::Base
   end
 
   def load_dir(dir)
-    @filenames = Dir[dir+"/**"].sort!
+    @filenames = Dir[dir + "/**"].sort!
   end
 
   def load_file(filename)

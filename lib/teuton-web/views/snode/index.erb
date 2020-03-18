@@ -1,0 +1,45 @@
+
+<div class="page-header">
+  <h2>S-Node</h2>
+  <p><b>Directory:</b> <%= Dir.pwd %></p>
+</div>
+
+<div class="row">
+  <div class="col-sm-6">
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h3 class="panel-title">Report files <span class="badge"><%= @filenames.size.to_s%></span></h3>
+      </div>
+      <div class="panel-body">
+        <ul>
+          <% @filenames.each do |filename| %>
+            <% if File.basename(filename).start_with? 'case-' %>
+              <li><a href="/snode/report/<%= route_for(filename) %>">
+                  <span class="label label-primary"><%= File.basename(filename) %></span>
+                  </a>
+              </li>
+            <% else %>
+              <li><%= File.basename(filename) %></li>
+            <% end %>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  </div><!-- /.col-sm-4 -->
+
+  <div class="col-sm-6">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Settings</h3>
+      </div>
+      <div class="panel-body">
+<!--    <div class="col-md-6">-->
+        <ul>
+          <li>Teuton-client</li>
+        </ul>
+<!--    </div>-->
+      </div>
+    </div>
+
+  </div><!-- /.col-sm-4 -->
+</div>

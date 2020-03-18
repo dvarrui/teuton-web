@@ -1,4 +1,6 @@
 
+require_relative 'application'
+
 ##
 # Sinatra.Service.Helpers
 module Sinatra
@@ -56,12 +58,10 @@ module Sinatra
         DIV
 
         text += '<li class="active"><a href="/">Mode: ' + @mode.to_s+ '</a></li>'
-        text += <<-DIV
-            <li><a href="https://github.com/teuton-software/teuton">GitHub</a></li>
-            <li><a href="https://github.com/teuton-software/teuton/blob/master/README.md">Documentation</a></li>
-          </ul>
-        </div> <!--/.nav-collapse -->
-        DIV
+        text += '<li><a href="https://github.com/teuton-software/teuton">GitHub</a></li>'
+        text += '<li><a href="https://github.com/teuton-software/teuton/blob/master/README.md">Documentation '
+        text += '(' + TeutonWeb::Application::VERSION + ')</a></li>'
+        text += '</ul></div> <!--/.nav-collapse -->'
         return text
       end
 
