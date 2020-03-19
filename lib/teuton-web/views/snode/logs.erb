@@ -14,23 +14,18 @@
 
 <div class="row">
 
-  <div class="col-sm-6">
+  <div class="col-sm-10">
     <div class="panel panel-default">
       <div class="panel-heading">
-        <h3 class="panel-title">Results</h3>
+        <h3 class="panel-title">Logs <span class="badge"><%= @data[:logs].size.to_s%></span></h3>
       </div>
       <div class="panel-body">
 <!--             <div class="col-md-6">-->
         <table class="table table-condensed">
           <tbody>
-            <% @data[:results].each_pair do |key, value| %>
+            <% @data[:logs].each do |log| %>
               <tr>
-                <td><%= key %></td>
-                <% if key == :grade %>
-                <td><span class="label label-primary"><%= value %></span></td>
-                <% else %>
-                <td><span class="label label-default"><%= value %></span></td>
-                <% end %>
+                <td><%= log %></td>
               </tr>
             <% end %>
           </tbody>
