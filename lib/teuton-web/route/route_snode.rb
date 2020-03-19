@@ -60,6 +60,11 @@ module Sinatra
         app.get '/snode/report/:filename/target/:id' do
           @mode = :Snode
           @data = YAML.load_file(params[:filename])
+          @data[:groups].each do |group|
+            group[:targets].each do |target|
+              @target = target if target[:target_id] == params[:id]
+            end
+          end
           erb :"snode/target"
         end
 
