@@ -49,6 +49,20 @@ module Sinatra
           erb :"snode/config"
         end
 
+        # Show filename params
+        app.get '/snode/report/:filename/results' do
+          @mode = :Snode
+          @data = YAML.load_file(params[:filename])
+          erb :"snode/results"
+        end
+
+        # Show filename params
+        app.get '/snode/report/:filename/logs' do
+          @mode = :Snode
+          @data = YAML.load_file(params[:filename])
+          erb :"snode/logs"
+        end
+
         # Show filename using YAML data
         app.get '/snode/report/:filename/targets' do
           @mode = :Snode
@@ -60,20 +74,20 @@ module Sinatra
         app.get '/snode/report/:filename/target/:id' do
           @mode = :Snode
           @data = YAML.load_file(params[:filename])
+          @target = nil
+          first = nil
           @data[:groups].each do |group|
             group[:targets].each do |target|
+              first = target if target[:target_id].to_i == 1
               @target = target if target[:target_id] == params[:id]
             end
           end
+          puts first
+          puts @target
+          @target = first if @target.nil?
           erb :"snode/target"
         end
 
-        # Show filename params
-        app.get '/snode/report/:filename/results' do
-          @mode = :Snode
-          @data = YAML.load_file(params[:filename])
-          erb :"snode/results"
-        end
       end
     end
   end
