@@ -14,9 +14,9 @@ module Sinatra
       end
 
       def string_to_filepath(string)
-        string.sub('$','/')
+        string.gsub('$','/')
       end
-      
+
       def remove_basedir(dir)
         items = @current.split(File::SEPARATOR)
         items.delete(".")

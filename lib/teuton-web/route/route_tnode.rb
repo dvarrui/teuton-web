@@ -19,7 +19,8 @@ module Sinatra
         # Show filename on raw mode
         app.get '/tnode/raw/:filepath' do
           @mode = :tnode
-          content = File.read(string_to_filepath(params[:filepath]))
+          a = string_to_filepath(params[:filepath])
+          content = File.read(a)
           "<pre>#{content}</pre>"
         end
 
