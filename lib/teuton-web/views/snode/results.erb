@@ -1,0 +1,42 @@
+
+<div class="page-header">
+  <h2>Report file: <%= params[:filename] %></h2>
+  <p>Directory: <span class="label label-default"><%= Dir.pwd %></span></p>
+  <p>
+    <a href="/snode">Back</a> |
+    <a href="/snode/report/<%=params[:filename]%>/raw">Raw</a> |
+    <a href="/snode/report/<%=params[:filename]%>/config">Config</a> |
+    <a href="/snode/report/<%=params[:filename]%>/targets">Target list</a> |
+    Results
+  </p>
+</div>
+
+<div class="row">
+
+  <div class="col-sm-6">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Results</h3>
+      </div>
+      <div class="panel-body">
+<!--             <div class="col-md-6">-->
+        <table class="table table-condensed">
+          <tbody>
+            <% @data[:results].each_pair do |key, value| %>
+              <tr>
+                <td><%= key %></td>
+                <% if key == :grade %>
+                <td><span class="label label-primary"><%= value %></span></td>
+                <% else %>
+                <td><span class="label label-default"><%= value %></span></td>
+                <% end %>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+<!--             </div>-->
+
+      </div>
+    </div>
+  </div>
+</div>

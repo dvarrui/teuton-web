@@ -1,0 +1,38 @@
+
+<div class="page-header">
+  <h2>Report file: <%= params[:filename] %></h2>
+  <p>Directory: <span class="label label-default"><%= Dir.pwd %></span></p>
+  <p>
+    <a href="/snode">Back</a> |
+    <a href="/snode/report/<%=params[:filename]%>/raw">Raw</a> |
+    Config |
+    <a href="/snode/report/<%=params[:filename]%>/targets">Target list</a> |
+    <a href="/snode/report/<%=params[:filename]%>/results">Results</a>
+  </p>
+</div>
+
+<div class="row">
+
+  <div class="col-sm-4">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Config</h3>
+      </div>
+      <div class="panel-body">
+<!--             <div class="col-md-6">-->
+        <table class="table table-condensed">
+          <tbody>
+            <% @data[:config].each_pair do |key, value| %>
+              <tr>
+                <td><%= key %></td>
+                <td><span class="label label-default"><%= value %></span></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+<!--             </div>-->
+
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,7 +1,14 @@
 
 <div class="page-header">
-  <h2>Test name: <%= @data[:config][:tt_testname]%></h2>
-  <p><b>Directory:</b> <span class="label label-default"><%= Dir.pwd %></span></p>
+  <h2>Report file: <%= params[:filename] %></h2>
+  <p>Directory: <span class="label label-default"><%= Dir.pwd %></span></p>
+  <p>
+    <a href="/snode">Back</a> |
+    <a href="/snode/report/<%=params[:filename]%>/raw">Raw</a> |
+    <a href="/snode/report/<%=params[:filename]%>/config">Config</a> |
+    Target list |
+    <a href="/snode/report/<%=params[:filename]%>/results">Results</a>
+  </p>
 </div>
 
 <div class="row">
@@ -23,7 +30,7 @@
           <tbody>
             <% @data[:groups][0][:targets].each do |target| %>
               <tr>
-                <td><%= target[:id].to_s %></td>
+                <td><span class="label label-default"><%= target[:target_id].to_s %></span></td>
                 <td><%= target[:description] %></td>
                 <td><%= target[:score] %>/ <%= target[:weight] %></td>
               </tr>

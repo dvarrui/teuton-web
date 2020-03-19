@@ -2,6 +2,7 @@
 <div class="page-header">
   <h2>S-Node</h2>
   <p><b>Directory:</b> <span class="label label-default"><%= Dir.pwd %></span></p>
+  <p>Choose report file...</p>
 </div>
 
 <div class="row">
@@ -15,32 +16,31 @@
         <table class="table table-condensed">
           <thead>
             <tr>
+              <td></td>
               <td><span class="label label-default">Filename</span></td>
               <td><span class="label label-default">Grade</span></td>
-              <td><span class="label label-default">Details</span></td>
               <td><span class="label label-default">Timestamp</span></td>
             </tr>
           </thead>
           <tbody>
             <% @list.each do |item| %>
               <tr>
+              <% if item[:show] %>
+                <td><a href="/snode/report/<%=item[:filename]%>/targets">
+                  <span class="label label-primary">Select</span></a>
+                </td>
+              <% else %>
+                <td></td>
+              <% end %>
               <% if item[:link] %>
                 <td>
-                  <a href="/snode/report/raw/<%=item[:filename]%>">
+                  <a href="/snode/report/<%=item[:filename]%>/raw">
                     <b><%=item[:filename]%></b></a>
                 </td>
                 <td><span class="badge"><%=item[:grade]%></span></td>
-                <% if item[:show] %>
-                  <td><a href="/snode/report/show/<%=item[:filename]%>">
-                    <span class="label label-primary">Show</span></a>
-                  </td>
-                <% else %>
-                  <td></td>
-                <% end %>
                 <td><%= item[:timestamp] %></td>
               <% else %>
                 <td><%= item[:filename] %></td>
-                <td></td>
                 <td></td>
                 <td></td>
               <% end %>

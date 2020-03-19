@@ -35,16 +35,39 @@ module Sinatra
           erb :"snode/index"
         end
 
-        app.get '/snode/report/raw/:filename' do
+        # Show filename on raw mode
+        app.get '/snode/report/:filename/raw' do
           @mode = :Snode
           content = File.read(params[:filename])
           "<pre>#{content}</pre>"
         end
 
-        app.get '/snode/report/show/:filename' do
+        # Show filename params
+        app.get '/snode/report/:filename/config' do
           @mode = :Snode
           @data = YAML.load_file(params[:filename])
-          erb :"snode/show"
+          erb :"snode/config"
+        end
+
+        # Show filename using YAML data
+        app.get '/snode/report/:filename/targets' do
+          @mode = :Snode
+          @data = YAML.load_file(params[:filename])
+          erb :"snode/targets"
+        end
+
+        # Show filename using YAML data
+        app.get '/snode/report/:filename/target/:id' do
+          @mode = :Snode
+          @data = YAML.load_file(params[:filename])
+          erb :"snode/target"
+        end
+
+        # Show filename params
+        app.get '/snode/report/:filename/results' do
+          @mode = :Snode
+          @data = YAML.load_file(params[:filename])
+          erb :"snode/results"
         end
       end
     end

@@ -1,20 +1,26 @@
 <div class="page-header">
-<h2>Choose mode</h2>
-<p><b>Directory:</b> <%= Dir.pwd%></p>
+  <h2>Choose mode</h2>
+  <p><b>Directory:</b> <span class="label label-default"><%= Dir.pwd %></span></p>
 </div>
 
 <div class="row">
   <div class="col-sm-6">
-    <div class="panel panel-primary">
+    <div class="panel panel-default">
       <div class="panel-heading">
         <h3 class="panel-title">T-node</h3>
       </div>
       <div class="panel-body">
 <!--    <div class="col-md-6">-->
-        <ul>
-          <li><a href="/tnode">T-NODE manager</a></li>
-          <li><a href="/tnode/install">T-NODE installation</a></li>
-        </ul>
+        <table class="table table-condensed">
+          <tbody>
+            <tr>
+             <td><a href="/tnode"><span class="label label-primary">T-NODE manager</span></a></td>
+            </tr>
+            <tr>
+             <td><a href="/tnode/install"><span class="label label-default">T-NODE installation</span></a></td>
+            </tr>
+          </tbody>
+        </table>
 <!--    </div>-->
       </div>
     </div>
@@ -22,7 +28,7 @@
 
   <div class="col-sm-6">
 <!--    <div class="panel panel-default"> -->
-    <div class="panel panel-primary">
+    <div class="panel panel-default">
       <div class="panel-heading">
         <h3 class="panel-title">S-node</h3>
       </div>
