@@ -9,13 +9,14 @@ module Sinatra
     # Sinatra TeutonWeb helpers
     module Helpers
 
-      BASEDIR = Dir.pwd # Base directory
-
-      def route_for(path)
-        s = BASEDIR.size + 1
-        return path[s,100]
+      def filepath_to_string(filepath)
+        filepath.gsub('/','$')
       end
 
+      def string_to_filepath(string)
+        string.sub('$','/')
+      end
+      
       def remove_basedir(dir)
         items = @current.split(File::SEPARATOR)
         items.delete(".")

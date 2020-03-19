@@ -18,13 +18,14 @@
   <div class="col-sm-8">
     <div class="panel panel-default">
       <div class="panel-heading">
-        <h3 class="panel-title">Target</h3>
+        <h3 class="panel-title">Target <span class="badge"><%= @target[:target_id].to_s%></h3>
       </div>
       <div class="panel-body">
 <!--             <div class="col-md-6">-->
         <table class="table table-condensed">
           <tbody>
             <% @target.each_pair do |key, value| %>
+            <%   next if key == :target_id %>
               <tr>
                 <td><%= key %></td>
                 <% if key == :check %>

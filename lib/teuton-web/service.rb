@@ -3,10 +3,11 @@ require 'sinatra/base'
 
 require_relative 'application'
 require_relative 'helpers'
-require_relative 'route/route_client'
-require_relative 'route/route_dir'
-require_relative 'route/route_file'
+#require_relative 'route/route_client'
+#require_relative 'route/route_dir'
+#require_relative 'route/route_file'
 require_relative 'route/route_snode'
+require_relative 'route/route_tnode'
 require_relative 'formatter/concept_haml_formatter'
 
 # SinatraFrontEnd class:
@@ -21,10 +22,11 @@ class Service < Sinatra::Base
   set :public_folder, File.join( File.dirname(__FILE__), 'public')
 
   helpers  Sinatra::Service::Helpers
-  register Sinatra::Service::RouteClient
-  register Sinatra::Service::RouteDir
-  register Sinatra::Service::RouteFile
+#  register Sinatra::Service::RouteClient
+#  register Sinatra::Service::RouteDir
+#  register Sinatra::Service::RouteFile
   register Sinatra::Service::RouteSnode
+  register Sinatra::Service::RouteTnode
 
   get '/' do
     @mode = :choose
@@ -35,11 +37,11 @@ class Service < Sinatra::Base
     redirect '/'
   end
 
-  def load_dir(dir)
-    @filenames = Dir[dir + "/**"].sort!
-  end
+#  def load_dir(dir)
+#    @filenames = Dir[dir + "/**"].sort!
+#  end
 
-  def load_file(filename)
-    return open(filename) { |i| i.read }
-  end
+#  def load_file(filename)
+#    return open(filename) { |i| i.read }
+#  end
 end
