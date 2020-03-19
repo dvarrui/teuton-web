@@ -1,14 +1,14 @@
 
 <div class="page-header">
-  <h2>Show: <%= @test[:dirname] %></h2>
+  <h2>Show: <%= @test[:dirpath] %></h2>
   <p><a href="/tnode">Back</a> |
-     <a href="/tnode/test/<%= @test[:id] %>/raw">Raw</a> |
-     Show
+     Show |
+     <a href="/tnode/execute/<%= @test[:id] %>/raw">Execute</a>
   </p>
 </div>
 
 <div class="row">
-  <div class="col-sm-12">
+  <div class="col-sm-6">
     <div class="panel panel-primary">
       <div class="panel-heading">
         <h3 class="panel-title">Test files <span class="badge"><%= @test[:files].size.to_s%></span></h3>
@@ -18,9 +18,17 @@
         <table class="table table-condensed">
           <tbody>
             <% @test[:files].each do |filepath| %>
-              <tr>
-                <td><a href="/tnode/raw/<%=filepath_to_string(filepath)%>"><%=filepath%></a></td>
-              </tr>
+            <tr>
+            <%   if File.basename(filepath) == 'start.rb' %>
+              <td>
+                <a href="/tnode/raw/<%=f2s(filepath)%>">
+                  <span class="label label-primary"><%=filepath%></span>
+                </a>
+              </td>
+            <% else %>
+              <td><a href="/tnode/raw/<%=f2s(filepath)%>"><%=filepath%></a></td>
+            <% end %>
+            </tr>
             <% end %>
           </tbody>
         </table>

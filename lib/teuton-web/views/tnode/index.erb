@@ -15,7 +15,6 @@
         <table class="table table-condensed">
           <thead>
             <tr>
-              <td></td>
               <td><span class="label label-default">ID</span></td>
               <td><span class="label label-default">Test</span></td>
             </tr>
@@ -23,12 +22,9 @@
           <tbody>
             <% @tests.each_with_index do |filepath, index| %>
               <tr>
-                <td><a href="/tnode/execute/<%=index%>">
-                  <span class="label label-primary">Execute</span></a>
-                </td>
-                <td><%= (index+1).to_s %></td>
+                <td><%= index.to_s %></td>
                 <td>
-                  <a href="/tnode/show/<%=index%>">
+                  <a href="/tnode/show/<%=f2s(filepath)%>">
                     <b><%=filepath%></b></a>
                 </td>
               </tr>

@@ -11,35 +11,29 @@ module Sinatra
           filenames = Dir.glob(File.join('**', 'start.rb')).sort!
           filenames.each do |filepath|
             next if filepath.include? '.devel/'
-            @tests << filepath
+            @tests << File.dirname(filepath)
           end
           erb :"tnode/index"
         end
 
         # Show filename on raw mode
-        app.get '/tnode/raw/:filepath' do
+        app.get '/tnode/raw/:input' do
           @mode = :tnode
-          a = string_to_filepath(params[:filepath])
+          a = s2f(params[:input])
           content = File.read(a)
           "<pre>#{content}</pre>"
         end
 
         # Show filename on raw mode
-        app.get '/tnode/show/:id' do
+        app.get '/tnode/show/:input' do
           @mode = :tnode
-          list = []
-          filenames = Dir.glob(File.join('**', 'start.rb')).sort!
-          filenames.each do |filepath|
-            next if filepath.include? '.devel/'
-            list << filepath
-          end
-          filepath = list[(params[:id].to_i - 1)]
-          dirname = File.dirname(filepath)
-          @test = { id: params[:id],
-                    filepath: filepath,
-                    dirname: dirname,
-                    files: Dir.glob(File.join(dirname, '**'))
+          dirpath = s2f(params[:input])
+          @test = { id: params[:input],
+                    dirpath: dirpath,
+                    files: Dir.glob(File.join(dirpath, '**')),
+                    outputdir: File.join('var', File.basename(dirpath))
                   }
+          puts @test
           erb :"tnode/show"
         end
       end

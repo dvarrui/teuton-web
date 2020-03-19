@@ -9,11 +9,11 @@ module Sinatra
     # Sinatra TeutonWeb helpers
     module Helpers
 
-      def filepath_to_string(filepath)
+      def f2s(filepath)
         filepath.gsub('/','$')
       end
 
-      def string_to_filepath(string)
+      def s2f(string)
         string.gsub('$','/')
       end
 
