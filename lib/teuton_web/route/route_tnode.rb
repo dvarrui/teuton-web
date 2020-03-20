@@ -28,9 +28,12 @@ module Sinatra
         app.get '/tnode/show/:input' do
           @mode = :tnode
           dirpath = s2f(params[:input])
+          files = Dir.glob(File.join(dirpath, '**', '*.rb')) +
+                  Dir.glob(File.join(dirpath, '**', '*.yaml')) +
+                  Dir.glob(File.join(dirpath, '**', '*.md'))
           @test = { id: params[:input],
                     dirpath: dirpath,
-                    files: Dir.glob(File.join(dirpath, '**')),
+                    files: files.sort,
                     outputdir: File.join('var', File.basename(dirpath))
                   }
           puts @test
