@@ -1,4 +1,5 @@
 #!/usr/bin/ruby
-require_relative 'teuton_web'
+require_relative 'teuton_web/cli'
 
-TeutonWeb.up
+# Start command line inteface
+CLI.start(ARGV)
