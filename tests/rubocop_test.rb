@@ -15,6 +15,7 @@ class RubocopTest < Minitest::Test
 
     @files[:lib] = []
     @files[:lib] << 'lib/teuton_web.rb'
+    @files[:lib] << 'lib/teuton_web/service.rb'
   end
 
   def test_rubocop_rake
