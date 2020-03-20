@@ -1,0 +1,49 @@
+
+<div class="page-header">
+  <h2>Reports: <%= @test[:dirpath] %></h2>
+  <p><a href="/tnode">Back</a> |
+     <a href="/tnode/show/<%= @test[:id] %>">Show</a> |
+     <a href="/tnode/execute/<%= @test[:id] %>">Execute</a> |
+     <a href="/tnode/resume/<%= @test[:id] %>">Resume</a> |
+     Params |
+     <a href="/tnode/reports/<%= @test[:id] %>">Reports</a>
+  </p>
+</div>
+
+<div class="row">
+  <div class="col-sm-12">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Params</h3>
+      </div>
+      <div class="panel-body">
+        <table class="table table-condensed">
+          <tbody>
+            <tr>
+              <td><b>Config</b></td>
+              <td></td>
+              <td></td>
+            <% @resume[:config].each_pair do |key, value| %>
+            <tr>
+              <td>
+              <td><%=key%></td>
+              <td><span class="label label-default"><%=value%></span></td>
+            </tr>
+            <% end %>
+            <tr>
+              <td><b>Results</b></td>
+              <td></td>
+              <td></td>
+            <% @resume[:results].each_pair do |key, value| %>
+            <tr>
+              <td>
+              <td><%=key%></td>
+              <td><span class="label label-default"><%=value%></span></td>
+            </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

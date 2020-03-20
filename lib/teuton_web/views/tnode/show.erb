@@ -3,15 +3,18 @@
   <h2>Show: <%= @test[:dirpath] %></h2>
   <p><a href="/tnode">Back</a> |
      Show |
-     <a href="/tnode/execute/<%= @test[:id] %>/raw">Execute</a>
+     <a href="/tnode/execute/<%= @test[:id] %>">Execute</a> |
+     <a href="/tnode/resume/<%= @test[:id] %>">Resume</a> |
+     <a href="/tnode/params/<%= @test[:id] %>">Params</a> |
+     <a href="/tnode/reports/<%= @test[:id] %>">Reports</a>
   </p>
 </div>
 
 <div class="row">
   <div class="col-sm-6">
-    <div class="panel panel-primary">
+    <div class="panel panel-default">
       <div class="panel-heading">
-        <h3 class="panel-title">Test files <span class="badge"><%= @test[:files].size.to_s%></span></h3>
+        <h3 class="panel-title">Test <span class="badge"><%= @test[:files].size.to_s%> files</span></h3>
       </div>
       <div class="panel-body">
 <!--             <div class="col-md-6">-->
@@ -22,11 +25,11 @@
             <%   if File.basename(filepath) == 'start.rb' %>
               <td>
                 <a href="/tnode/raw/<%=f2s(filepath)%>">
-                  <span class="label label-primary"><%=filepath%></span>
+                  <span class="label label-primary"><%=filepath[@test[:dirpath].size + 1,filepath.size ]%></span>
                 </a>
               </td>
             <% else %>
-              <td><a href="/tnode/raw/<%=f2s(filepath)%>"><%=filepath%></a></td>
+              <td><a href="/tnode/raw/<%=f2s(filepath)%>"><%=filepath[@test[:dirpath].size + 1,filepath.size ]%></a></td>
             <% end %>
             </tr>
             <% end %>
@@ -41,29 +44,32 @@
   <div class="col-sm-6">
     <div class="panel panel-default">
       <div class="panel-heading">
-        <h3 class="panel-title">Output reports <span class="badge"><%= @test[:files].size.to_s%></span></h3>
+        <h3 class="panel-title">Config <span class="badge"><%=@config[:files].size.to_s%> files</span></h3>
       </div>
       <div class="panel-body">
-<!--             <div class="col-md-6">-->
         <table class="table table-condensed">
           <tbody>
-            <% @test[:files].each do |filepath| %>
+            <% @config[:files].each do |filepath| %>
+            <%   if File.basename(filepath) == 'config.yaml' %>
             <tr>
-            <%   if File.basename(filepath) == 'start.rb' %>
               <td>
                 <a href="/tnode/raw/<%=f2s(filepath)%>">
-                  <span class="label label-primary"><%=filepath%></span>
+                  <td>
+                    <a href="/tnode/raw/<%=f2s(filepath)%>">
+                      <span class="label label-primary"><%=filepath[@config[:dirpath].size + 1,filepath.size]%></span>
+                    </a>
+                  </td>
                 </a>
               </td>
-            <% else %>
-              <td><a href="/tnode/raw/<%=f2s(filepath)%>"><%=filepath%></a></td>
-            <% end %>
             </tr>
+            <%   else %>
+            <tr>
+              <td><a href="/tnode/raw/<%=f2s(filepath)%>"><%=filepath[@config[:dirpath].size + 1,filepath.size]%></a></td>
+            </tr>
+            <%   end %>
             <% end %>
           </tbody>
         </table>
-<!--             </div>-->
-
       </div>
     </div>
   </div>

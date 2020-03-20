@@ -29,15 +29,59 @@ module Sinatra
           @mode = :tnode
           dirpath = s2f(params[:input])
           files = Dir.glob(File.join(dirpath, '**', '*.rb')) +
-                  Dir.glob(File.join(dirpath, '**', '*.yaml')) +
                   Dir.glob(File.join(dirpath, '**', '*.md'))
           @test = { id: params[:input],
                     dirpath: dirpath,
-                    files: files.sort,
-                    outputdir: File.join('var', File.basename(dirpath))
+                    files: files.sort
                   }
-          puts @test
+          files = Dir.glob(File.join(dirpath, '**', '*.yaml')) +
+                  Dir.glob(File.join(dirpath, '**', '*.json'))
+          @config = { dirpath: dirpath,
+                      files: files.sort }
           erb :"tnode/show"
+        end
+
+        app.get '/tnode/resume/:input' do
+          @mode = :tnode
+          dirpath = s2f(params[:input])
+          files = Dir.glob(File.join(dirpath, '**', '*.rb')) +
+                  Dir.glob(File.join(dirpath, '**', '*.yaml')) +
+                  Dir.glob(File.join(dirpath, '**', '*.md'))
+          @test = { id: params[:input],
+                    dirpath: dirpath }
+          testname = File.basename(s2f(params[:input]))
+          @resume = YAML.load_file(File.join('var', testname, 'resume.yaml'))
+          erb :"tnode/resume"
+        end
+
+        app.get '/tnode/params/:input' do
+          @mode = :tnode
+          dirpath = s2f(params[:input])
+          @test = { id: params[:input],
+                    dirpath: dirpath }
+          testname = File.basename(s2f(params[:input]))
+          @resume = YAML.load_file(File.join('var', testname, 'resume.yaml'))
+          erb :"tnode/params"
+        end
+
+        # Show filename on raw mode
+        app.get '/tnode/reports/:input' do
+          @mode = :tnode
+          dirpath = s2f(params[:input])
+          files = Dir.glob(File.join(dirpath, '**', '*.rb')) +
+                  Dir.glob(File.join(dirpath, '**', '*.yaml')) +
+                  Dir.glob(File.join(dirpath, '**', '*.md'))
+          @test = { id: params[:input],
+                    dirpath: dirpath }
+          testname = File.basename(s2f(params[:input]))
+          dirpath = File.join('var', testname)
+          files = Dir.glob(File.join(dirpath, '*.txt')) +
+                  Dir.glob(File.join(dirpath, '*.json')) +
+                  Dir.glob(File.join(dirpath, '*.yaml'))
+          @reports = { testname: testname,
+                       dirpath: dirpath,
+                       files: files.sort }
+          erb :"tnode/reports"
         end
       end
     end

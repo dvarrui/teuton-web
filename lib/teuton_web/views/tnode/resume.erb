@@ -1,0 +1,48 @@
+
+<div class="page-header">
+  <h2>Reports: <%= @test[:dirpath] %></h2>
+  <p><a href="/tnode">Back</a> |
+     <a href="/tnode/show/<%= @test[:id] %>">Show</a> |
+     <a href="/tnode/execute/<%= @test[:id] %>">Execute</a> |
+     <a href="/tnode/params/<%= @test[:id] %>">Params</a> |
+     Resume |
+     <a href="/tnode/reports/<%= @test[:id] %>">Reports</a>
+  </p>
+</div>
+
+<div class="row">
+  <div class="col-sm-10">
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h3 class="panel-title">Resume <span class="badge"><%=@resume[:cases].size.to_s%> cases</span></h3>
+      </div>
+      <div class="panel-body">
+        <table class="table table-condensed">
+          <thead>
+            <tr>
+              <td><span class="label label-default">ID</span></td>
+              <td><span class="label label-default">Members</span></td>
+              <td><span class="label label-default">Grade</span></td>
+              <td><span class="label label-default">Conn Status</span></td>
+            </tr>
+          </thead>
+
+          <tbody>
+            <% @resume[:cases].each do |c| %>
+            <tr>
+              <td><%=c[:id]%></td>
+              <td><%=c[:members]%></td>
+              <td><%=c[:grade]%></td>
+              <% if c[:conn_status].size.zero? %>
+              <td></td>
+              <% else %>
+              <td><span class="label label-danger"><%=c[:conn_status]%></span></td>
+              <% end %>
+            </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
