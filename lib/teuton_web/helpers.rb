@@ -59,13 +59,14 @@ module Sinatra
         DIV
 
         text += '<li class="active"><a href="/' + @mode.to_s.downcase + '">Mode: ' + @mode.to_s+ '</a></li>'
-        text += '<li><a href="https://github.com/teuton-software/teuton">GitHub</a></li>'
-        text += '<li><a href="https://github.com/teuton-software/teuton/blob/master/README.md">Documentation '
-        text += '(' + TeutonWeb::Application::VERSION + ')</a></li>'
+        text += '<li><a href="https://github.com/dvarrui/teuton-web">GitHub</a></li>'
+        text += <<-DIV
+        <li><a href="https://github.com/dvarrui/teuton-web/blob/master/README.md">Documentation
+        DIV
+        text += ' (' + TeutonWeb::Application::VERSION + ')</a></li>'
         text += '</ul></div> <!--/.nav-collapse -->'
-        return text
+        text
       end
-
     end
   end
 end
