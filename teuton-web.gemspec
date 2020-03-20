@@ -1,4 +1,4 @@
-require_relative 'lib/teuton-web/application'
+require_relative 'lib/teuton_web/application'
 
 Gem::Specification.new do |s|
   s.name        = TeutonWeb::Application::NAME
