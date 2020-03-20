@@ -48,6 +48,7 @@ module Sinatra
                   Dir.glob(File.join(dirpath, '**', '*.yaml')) +
                   Dir.glob(File.join(dirpath, '**', '*.md'))
           @test = { id: params[:input],
+                    testname: File.basename(s2f(params[:input])),
                     dirpath: dirpath }
           testname = File.basename(s2f(params[:input]))
           @resume = YAML.load_file(File.join('var', testname, 'resume.yaml'))
@@ -83,6 +84,15 @@ module Sinatra
                        files: files.sort }
           erb :"tnode/reports"
         end
+
+        # Show filename using YAML data
+        app.get '/tnode/test/:testpath/case/:filename/targets' do
+          @mode = :Tnode
+          @testpath = params[:testpath]
+          @data = YAML.load_file(s2f(params[:filename]))
+          erb :"tnode/case/targets"
+        end
+
       end
     end
   end

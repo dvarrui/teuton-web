@@ -4,8 +4,8 @@
   <p><a href="/tnode">Back</a> |
      <a href="/tnode/show/<%= @test[:id] %>">Show</a> |
      <a href="/tnode/execute/<%= @test[:id] %>">Execute</a> |
-     <a href="/tnode/params/<%= @test[:id] %>">Params</a> |
      Resume |
+     <a href="/tnode/params/<%= @test[:id] %>">Params</a> |
      <a href="/tnode/reports/<%= @test[:id] %>">Reports</a>
   </p>
 </div>
@@ -29,10 +29,13 @@
 
           <tbody>
             <% @resume[:cases].each do |c| %>
+            <% filename = File.join('var',
+                                    @test[:testname],
+                                    c[:id].to_s.gsub('_', '-') + '.yaml') %>
             <tr>
               <td><%=c[:id]%></td>
               <td><%=c[:members]%></td>
-              <td><%=c[:grade]%></td>
+              <td><a href="/tnode/test/<%= f2s(@test[:dirpath])%>/case/<%=f2s(filename)%>/targets"><%=c[:grade]%></a></td>
               <% if c[:conn_status].size.zero? %>
               <td></td>
               <% else %>
