@@ -24,7 +24,7 @@ module Sinatra
           "<pre>#{content}</pre>"
         end
 
-        # Show filename on raw mode
+        # Show files for :input test
         app.get '/tnode/files/:input' do
           @mode = 'tnode'
           dirpath = s2f(params[:input])
@@ -32,13 +32,21 @@ module Sinatra
                   Dir.glob(File.join(dirpath, '**', '*.md'))
           @test = { id: params[:input],
                     dirpath: dirpath,
-                    files: files.sort
-                  }
+                    files: files.sort }
           files = Dir.glob(File.join(dirpath, '**', '*.yaml')) +
                   Dir.glob(File.join(dirpath, '**', '*.json'))
           @config = { dirpath: dirpath,
                       files: files.sort }
           erb :"tnode/files"
+        end
+
+        app.get '/tnode/cases/:input' do
+          @mode = 'tnode'
+          @test = { id: params[:input],
+                    testname: get_testname_from(params[:input]),
+                    dirpath: get_dirpath_from(params[:input]) }
+          @config = YAML.load_file(File.join(get_dirpath_from(params[:input]), 'config.yaml'))
+          erb :"tnode/cases"
         end
 
         app.get '/tnode/resume/:input' do

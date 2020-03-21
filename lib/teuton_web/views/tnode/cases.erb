@@ -1,0 +1,46 @@
+
+<div class="page-header">
+  <h2>Cases: <%= @test[:dirpath] %></h2>
+  <p><a href="/tnode">Back</a> |
+     <a href="/tnode/files/<%= @test[:id] %>">Files</a> |
+     Cases |
+     <a href="/tnode/reports/<%= @test[:id] %>">Reports</a> |
+     <a href="/tnode/resume/<%= @test[:id] %>">Resume</a> |
+     <a href="/tnode/params/<%= @test[:id] %>">Params</a>
+  </p>
+</div>
+
+<div class="row">
+  <div class="col-sm-6">
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h3 class="panel-title">Cases <span class="badge"><%=@config[:cases].size.to_s%> cases</span></h3>
+      </div>
+      <div class="panel-body">
+        <table class="table table-condensed">
+          <thead>
+            <tr>
+              <td><span class="label label-default">Case</span></td>
+              <td><span class="label label-default">Members</span></td>
+              <td><span class="label label-primary">Execute ALL</span></td>
+            </tr>
+          </thead>
+
+          <tbody>
+            <% @config[:cases].each_with_index do |c, index| %>
+            <% filename = File.join('var', @test[:testname],
+                                    "case-#{c[:id]}.yaml")
+               case_id = format('%02d', (index+1))
+            %>
+            <tr>
+              <td><%= case_id %></td>
+              <td><%=c[:tt_members]%></td>
+              <td><span class="label label-primary">Execute <%= case_id%></span></td>
+            </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

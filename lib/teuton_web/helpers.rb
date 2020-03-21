@@ -17,30 +17,16 @@ module Sinatra
         string.gsub('$','/')
       end
 
-      def remove_basedir(dir)
-        items = @current.split(File::SEPARATOR)
-        items.delete(".")
-        items.delete("..")
-        items.delete(BASEDIR)
-        return File.join(items,File::SEPARATOR)
+      def get_dirpath_from(input)
+        s2f(input)
       end
 
-      def html_for_current( option={ :indexlast => false} )
-        output = "<a href=\"/dir/list\">Home</a>"
-        relative_path = route_for @current
-        return output if relative_path.nil?
+      def get_testname_from(input)
+        File.basename(s2f(params[:input]))
+      end
 
-        items = relative_path.split(File::SEPARATOR)
-        before = ""
-        items.each do |i|
-          if i==items.last and option[:indexlast]==false then
-            output += "/"+i
-          else
-            before=before+"/"+i
-            output += "/<a href=\"/dir/list"+before+"\">"+i+"</a>"
-          end
-        end
-        return output
+      def get_vardir_from(input)
+        File.join('var', get_testname_from(input))
       end
 
       def html_for_navbar

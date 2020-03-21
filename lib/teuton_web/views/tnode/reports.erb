@@ -23,7 +23,7 @@
                @reports[:files].each do |filepath|
                  i = { filename: File.basename(filepath),
                             filepath: filepath }
-                 s = i[:filename][0,7]
+                 s = i[:filename].split('.')[0]
                  if list[s].nil?
                    list[s] = [i]
                  else
