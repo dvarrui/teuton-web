@@ -20,7 +20,7 @@
         <table class="table table-condensed">
           <thead>
             <tr>
-              <td><span class="label label-default">ID</span></td>
+              <td><span class="label label-default">Case</span></td>
               <td><span class="label label-default">Members</span></td>
               <td><span class="label label-default">Grade</span></td>
               <td><span class="label label-default">Conn Status</span></td>
@@ -31,7 +31,7 @@
             <% @resume[:cases].each do |c| %>
             <% filename = File.join('var',
                                     @test[:testname],
-                                    c[:id].to_s.gsub('_', '-') + '.yaml') %>
+                                    "case-#{c[:id]}.yaml") %>
             <tr>
               <td><%=c[:id]%></td>
               <td><%=c[:members]%></td>
