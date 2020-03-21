@@ -1,12 +1,12 @@
 
 <div class="page-header">
-  <h2>Show: <%= @test[:dirpath] %></h2>
+  <h2><%= @test[:dirpath] %></h2>
   <p><a href="/tnode">Back</a> |
-     Show |
-     <a href="/tnode/execute/<%= @test[:id] %>">Execute</a> |
+     Files |
+     <a href="/tnode/cases/<%= @test[:id] %>">Cases</a> |
+     <a href="/tnode/reports/<%= @test[:id] %>">Reports</a> |
      <a href="/tnode/resume/<%= @test[:id] %>">Resume</a> |
-     <a href="/tnode/params/<%= @test[:id] %>">Params</a> |
-     <a href="/tnode/reports/<%= @test[:id] %>">Reports</a>
+     <a href="/tnode/params/<%= @test[:id] %>">Params</a>
   </p>
 </div>
 

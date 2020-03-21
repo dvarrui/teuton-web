@@ -1,6 +1,6 @@
 
 <div class="page-header">
-  <h2>T-Node: Tests list</h2>
+  <h2>Tests list</h2>
   <p><b>Directory:</b> <span class="label label-default"><%= Dir.pwd %></span></p>
   <p>Choose test... <span class="badge"><%= @tests.size.to_s%></span></p>
 </div>
@@ -26,7 +26,7 @@
               <tr>
                 <td><%= index.to_s %></td>
                 <td>
-                  <a href="/tnode/resume/<%=f2s(filepath)%>">
+                  <a href="/tnode/files/<%=f2s(filepath)%>">
                     <b><%=filepath%></b></a>
                 </td>
               </tr>

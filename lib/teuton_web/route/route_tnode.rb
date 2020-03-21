@@ -6,7 +6,7 @@ module Sinatra
     module RouteTnode
       def self.registered(app)
         app.get '/tnode' do
-          @mode = :tnode
+          @mode = 'tnode'
           @tests = []
           filenames = Dir.glob(File.join('**', 'start.rb')).sort!
           filenames.each do |filepath|
@@ -18,15 +18,15 @@ module Sinatra
 
         # Show filename on raw mode
         app.get '/tnode/raw/:input' do
-          @mode = :tnode
+          @mode = 'tnode'
           a = s2f(params[:input])
           content = File.read(a)
           "<pre>#{content}</pre>"
         end
 
         # Show filename on raw mode
-        app.get '/tnode/show/:input' do
-          @mode = :tnode
+        app.get '/tnode/files/:input' do
+          @mode = 'tnode'
           dirpath = s2f(params[:input])
           files = Dir.glob(File.join(dirpath, '**', '*.rb')) +
                   Dir.glob(File.join(dirpath, '**', '*.md'))
@@ -38,11 +38,11 @@ module Sinatra
                   Dir.glob(File.join(dirpath, '**', '*.json'))
           @config = { dirpath: dirpath,
                       files: files.sort }
-          erb :"tnode/show"
+          erb :"tnode/files"
         end
 
         app.get '/tnode/resume/:input' do
-          @mode = :tnode
+          @mode = 'tnode'
           dirpath = s2f(params[:input])
           files = Dir.glob(File.join(dirpath, '**', '*.rb')) +
                   Dir.glob(File.join(dirpath, '**', '*.yaml')) +
@@ -56,7 +56,7 @@ module Sinatra
         end
 
         app.get '/tnode/params/:input' do
-          @mode = :tnode
+          @mode = 'tnode'
           dirpath = s2f(params[:input])
           @test = { id: params[:input],
                     dirpath: dirpath }
@@ -67,7 +67,7 @@ module Sinatra
 
         # Show filename on raw mode
         app.get '/tnode/reports/:input' do
-          @mode = :tnode
+          @mode = 'tnode'
           dirpath = s2f(params[:input])
           files = Dir.glob(File.join(dirpath, '**', '*.rb')) +
                   Dir.glob(File.join(dirpath, '**', '*.yaml')) +
@@ -87,12 +87,11 @@ module Sinatra
 
         # Show filename using YAML data
         app.get '/tnode/test/:testpath/case/:filename/targets' do
-          @mode = :Tnode
+          @mode = 'tnode'
           @testpath = params[:testpath]
           @data = YAML.load_file(s2f(params[:filename]))
           erb :"tnode/case/targets"
         end
-
       end
     end
   end

@@ -6,7 +6,7 @@ module Sinatra
     module RouteSnode
       def self.registered(app)
         app.get '/snode' do
-          @mode = :Snode
+          @mode = 'snode'
           @current = Dir.pwd
           @list = []
           filenames = Dir.glob(File.join(@current, "**")).sort!
@@ -37,42 +37,42 @@ module Sinatra
 
         # Show filename on raw mode
         app.get '/snode/report/:filename/raw' do
-          @mode = :Snode
+          @mode = 'snode'
           content = File.read(params[:filename])
           "<pre>#{content}</pre>"
         end
 
         # Show filename params
         app.get '/snode/report/:filename/config' do
-          @mode = :Snode
+          @mode = 'snode'
           @data = YAML.load_file(params[:filename])
           erb :"snode/config"
         end
 
         # Show filename params
         app.get '/snode/report/:filename/results' do
-          @mode = :Snode
+          @mode = 'snode'
           @data = YAML.load_file(params[:filename])
           erb :"snode/results"
         end
 
         # Show filename params
         app.get '/snode/report/:filename/logs' do
-          @mode = :Snode
+          @mode = 'snode'
           @data = YAML.load_file(params[:filename])
           erb :"snode/logs"
         end
 
         # Show filename using YAML data
         app.get '/snode/report/:filename/targets' do
-          @mode = :Snode
+          @mode = 'snode'
           @data = YAML.load_file(params[:filename])
           erb :"snode/targets"
         end
 
         # Show filename using YAML data
         app.get '/snode/report/:filename/target/:id' do
-          @mode = :Snode
+          @mode = 'snode'
           @data = YAML.load_file(params[:filename])
           @target = nil
           first = nil
@@ -87,7 +87,6 @@ module Sinatra
           @target = first if @target.nil?
           erb :"snode/target"
         end
-
       end
     end
   end

@@ -2,11 +2,11 @@
 <div class="page-header">
   <h2>Reports: <%= @test[:dirpath] %></h2>
   <p><a href="/tnode">Back</a> |
-     <a href="/tnode/show/<%= @test[:id] %>">Show</a> |
-     <a href="/tnode/execute/<%= @test[:id] %>">Execute</a> |
+     <a href="/tnode/files/<%= @test[:id] %>">Files</a> |
+     <a href="/tnode/cases/<%= @test[:id] %>">Cases</a> |
+     Reports |
      <a href="/tnode/resume/<%= @test[:id] %>">Resume</a> |
-     <a href="/tnode/params/<%= @test[:id] %>">Params</a> |
-     Reports
+     <a href="/tnode/params/<%= @test[:id] %>">Params</a>
   </p>
 </div>
 
@@ -19,9 +19,24 @@
       <div class="panel-body">
         <table class="table table-condensed">
           <tbody>
-            <% @reports[:files].each do |filepath| %>
+            <% list = {}
+               @reports[:files].each do |filepath|
+                 i = { filename: File.basename(filepath),
+                            filepath: filepath }
+                 s = i[:filename][0,7]
+                 if list[s].nil?
+                   list[s] = [i]
+                 else
+                   list[s] << i
+                 end
+               end %>
+            <% list.each_value do |items| %>
             <tr>
-              <td><a href="/tnode/raw/<%=f2s(filepath)%>"><%=filepath[@reports[:dirpath].size + 1,filepath.size]%></a></td>
+              <% items.each do |item| %>
+              <td>
+              <a href="/tnode/raw/<%=f2s(item[:filepath])%>"><%=item[:filename]%></a>
+              </td>
+              <% end %>
             </tr>
             <% end %>
           </tbody>

@@ -21,7 +21,7 @@ class Service < Sinatra::Base
   register Sinatra::Service::RouteTnode
 
   get '/' do
-    @mode = :choose
+    @mode = 'choose'
     erb :'/index/choose'
   end
 
