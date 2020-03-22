@@ -1,5 +1,5 @@
 
-require_relative 'application'
+require_relative '../application'
 
 ##
 # Sinatra.Service.Helpers
@@ -7,7 +7,7 @@ module Sinatra
   module Service
     ##
     # Sinatra TeutonWeb helpers
-    module Helpers
+    module MainHelper
 
       def f2s(filepath)
         filepath.gsub('/','$')

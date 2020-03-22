@@ -3,7 +3,7 @@ require 'yaml'
 
 module Sinatra
   module Service
-    module RouteTnode
+    module TnodeController
       def self.registered(app)
         app.get '/tnode' do
           @mode = 'tnode'

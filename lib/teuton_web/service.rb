@@ -3,9 +3,9 @@
 require 'sinatra/base'
 
 require_relative 'application'
-require_relative 'helpers'
-require_relative 'route/route_snode'
-require_relative 'route/route_tnode'
+require_relative 'helpers/main_helper'
+require_relative 'controllers/snode_controller'
+require_relative 'controllers/tnode_controller'
 
 ##
 # Service Sinatra class
@@ -16,9 +16,9 @@ class Service < Sinatra::Base
   set :views,         File.join(File.dirname(__FILE__), 'views')
   set :public_folder, File.join(File.dirname(__FILE__), 'public')
 
-  helpers  Sinatra::Service::Helpers
-  register Sinatra::Service::RouteSnode
-  register Sinatra::Service::RouteTnode
+  helpers  Sinatra::Service::MainHelper
+  register Sinatra::Service::SnodeController
+  register Sinatra::Service::TnodeController
 
   get '/' do
     @mode = 'choose'
