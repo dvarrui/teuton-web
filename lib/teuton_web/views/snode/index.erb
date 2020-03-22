@@ -25,25 +25,19 @@
           <tbody>
             <% @list.each do |item| %>
               <tr>
-              <% if item[:show] %>
+                <% if item[:has_targets] %>
                 <td><a href="/snode/report/<%=item[:filename]%>/targets">
                   <span class="label label-primary">Select</span></a>
                 </td>
-              <% else %>
+                <% else %>
                 <td></td>
-              <% end %>
-              <% if item[:link] %>
+                <% end %>
                 <td>
                   <a href="/snode/report/<%=item[:filename]%>/raw">
                     <b><%=item[:filename]%></b></a>
                 </td>
                 <td><span class="badge"><%=item[:grade]%></span></td>
                 <td><%= item[:timestamp] %></td>
-              <% else %>
-                <td><%= item[:filename] %></td>
-                <td></td>
-                <td></td>
-              <% end %>
               </tr>
             <% end %>
           </tbody>

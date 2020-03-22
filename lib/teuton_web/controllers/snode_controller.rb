@@ -1,5 +1,6 @@
 
 require 'yaml'
+require_relative 'snode_utils'
 
 module Sinatra
   module Service
@@ -7,31 +8,7 @@ module Sinatra
       def self.registered(app)
         app.get '/snode' do
           @mode = 'snode'
-          @current = Dir.pwd
-          @list = []
-          filenames = Dir.glob(File.join(@current, "**")).sort!
-          filenames.each do |filepath|
-            item = { filename: File.basename(filepath) }
-            stat = File.stat(filepath).ctime
-            ctime = { year: stat.year, month: stat.month, day: stat.day,
-                      hour: stat.hour, min: stat.min, sec: stat.sec }
-            timestamp = format("%<year>04d-%<month>02d-%<day>02d %<hour>02d:%<min>02d:%<sec>02d", ctime)
-            item[:timestamp] = timestamp
-            item[:link] = true
-            item[:link] = false unless item[:filename].start_with? 'case-'
-            item[:ext] = File.extname(item[:filename])
-            item[:grade] = ''
-            item[:show] = false
-            if item[:ext] == '.yaml' && item[:link]
-              item[:show] = true
-              data = YAML.load_file(filepath)
-              item[:grade] = data[:results][:grade]
-            elsif item[:ext] == '.txt' && item[:link]
-              data = File.read(filepath).split("\n")
-              item[:grade] = data[data.size-2].split(' ')[3]
-            end
-            @list << item
-          end
+          @list = SnodeUtils.get_snode_report_files
           erb :"snode/index"
         end
 
