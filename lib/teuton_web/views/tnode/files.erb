@@ -14,13 +14,13 @@
   <div class="col-sm-6">
     <div class="panel panel-default">
       <div class="panel-heading">
-        <h3 class="panel-title">Test <span class="badge"><%= @test[:files].size.to_s%> files</span></h3>
+        <h3 class="panel-title">Test <span class="badge"><%= @test[:testfiles].size.to_s%> files</span></h3>
       </div>
       <div class="panel-body">
 <!--             <div class="col-md-6">-->
         <table class="table table-condensed">
           <tbody>
-            <% @test[:files].each do |filepath| %>
+            <% @test[:testfiles].each do |filepath| %>
             <tr>
             <%   if File.basename(filepath) == 'start.rb' %>
               <td>
@@ -35,8 +35,6 @@
             <% end %>
           </tbody>
         </table>
-<!--             </div>-->
-
       </div>
     </div>
   </div>
@@ -44,19 +42,19 @@
   <div class="col-sm-6">
     <div class="panel panel-default">
       <div class="panel-heading">
-        <h3 class="panel-title">Config <span class="badge"><%=@config[:files].size.to_s%> files</span></h3>
+        <h3 class="panel-title">Config <span class="badge"><%=@test[:configfiles].size.to_s%> files</span></h3>
       </div>
       <div class="panel-body">
         <table class="table table-condensed">
           <tbody>
-            <% @config[:files].each do |filepath| %>
+            <% @test[:configfiles].each do |filepath| %>
             <%   if File.basename(filepath) == 'config.yaml' %>
             <tr>
               <td>
                 <a href="/tnode/raw/<%=f2s(filepath)%>">
                   <td>
                     <a href="/tnode/raw/<%=f2s(filepath)%>">
-                      <span class="label label-primary"><%=filepath[@config[:dirpath].size + 1,filepath.size]%></span>
+                      <span class="label label-primary"><%=filepath[@test[:dirpath].size + 1,filepath.size]%></span>
                     </a>
                   </td>
                 </a>
@@ -64,7 +62,7 @@
             </tr>
             <%   else %>
             <tr>
-              <td><a href="/tnode/raw/<%=f2s(filepath)%>"><%=filepath[@config[:dirpath].size + 1,filepath.size]%></a></td>
+              <td><a href="/tnode/raw/<%=f2s(filepath)%>"><%=filepath[@test[:dirpath].size + 1,filepath.size]%></a></td>
             </tr>
             <%   end %>
             <% end %>

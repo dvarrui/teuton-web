@@ -1,5 +1,6 @@
 
 require 'yaml'
+require_relative '../models/tnode_model'
 
 module Sinatra
   module Service
@@ -7,13 +8,15 @@ module Sinatra
       def self.registered(app)
         app.get '/tnode' do
           @mode = 'tnode'
-          @tests = []
-          filenames = Dir.glob(File.join('**', 'start.rb')).sort!
-          filenames.each do |filepath|
-            next if filepath.include? '.devel/'
-            @tests << File.dirname(filepath)
-          end
+          @tests = TnodeModel.find_all_tests
           erb :"tnode/index"
+        end
+
+        # Show files for :input test
+        app.get '/tnode/files/:id' do
+          @mode = 'tnode'
+          @test = TnodeModel.find_test_by_id(params[:id])
+          erb :"tnode/files"
         end
 
         # Show filename on raw mode
@@ -23,23 +26,6 @@ module Sinatra
           content = File.read(a)
           "<pre>#{content}</pre>"
         end
-
-        # Show files for :input test
-        app.get '/tnode/files/:input' do
-          @mode = 'tnode'
-          dirpath = s2f(params[:input])
-          files = Dir.glob(File.join(dirpath, '**', '*.rb')) +
-                  Dir.glob(File.join(dirpath, '**', '*.md'))
-          @test = { id: params[:input],
-                    dirpath: dirpath,
-                    files: files.sort }
-          files = Dir.glob(File.join(dirpath, '**', '*.yaml')) +
-                  Dir.glob(File.join(dirpath, '**', '*.json'))
-          @config = { dirpath: dirpath,
-                      files: files.sort }
-          erb :"tnode/files"
-        end
-
         app.get '/tnode/cases/:input' do
           @mode = 'tnode'
           @test = { id: params[:input],
