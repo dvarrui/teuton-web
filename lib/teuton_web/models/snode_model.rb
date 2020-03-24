@@ -3,21 +3,20 @@ require 'yaml'
 
 module SnodeModel
   ##
-  # Get Snode report files from current directory
+  # Find all Snode report files from current directory
   # @return Array
-  def self.get_report_files()
+  def self.find_files()
     file_list = []
     filenames = Dir.glob(File.join(Dir.pwd, '*.*')).sort!
     filenames.each do |filepath|
       item = { filename: File.basename(filepath) }
       next unless item[:filename].start_with? 'case-'
       item[:has_targets] = has_targets?(filepath)
-      item[:grade] = SnodeUtils.get_grade(filepath)
-      item[:timestamp] = SnodeUtils.get_timestamp(filepath)
+      item[:grade] = SnodeModel.get_grade(filepath)
+      item[:timestamp] = SnodeModel.get_timestamp(filepath)
       file_list << item
     end
-    puts file_list
-    return file_list
+    file_list
   end
 
   def self.has_targets?(filepath)

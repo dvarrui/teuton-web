@@ -7,7 +7,7 @@ module Sinatra
       def self.registered(app)
         app.get '/snode' do
           @mode = 'snode'
-          @list = SnodeModel.get_report_files
+          @list = SnodeModel.find_files
           erb :"snode/index"
         end
 

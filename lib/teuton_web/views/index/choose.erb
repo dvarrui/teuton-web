@@ -4,13 +4,14 @@
 </div>
 
 <div class="row">
+  <% if @env[:tnode] %>
   <div class="col-sm-6">
     <div class="panel panel-default">
       <div class="panel-heading">
         <h3 class="panel-title">T-node</h3>
       </div>
       <div class="panel-body">
-<!--    <div class="col-md-6">-->
+      <div class="col-md-6">
         <p>
           <a href="/tnode">
             <span class="label label-primary">T-NODE manager</span>
@@ -21,11 +22,13 @@
           <li>Teuton installed on this machine.</li>
           <li>T-Node user monitotize S-Node machines.</li>
         </ul>
-<!--    </div>-->
+      </div>
       </div>
     </div>
   </div><!-- /.col-sm-4 -->
+  <% end %>
 
+  <% if @env[:snode] %>
   <div class="col-sm-6">
 <!--    <div class="panel panel-default"> -->
     <div class="panel panel-default">
@@ -46,4 +49,5 @@
       </div>
     </div>
   </div><!-- /.col-sm-4 -->
+  <% end %>
 </div>

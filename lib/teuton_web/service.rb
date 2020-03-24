@@ -3,9 +3,10 @@
 require 'sinatra/base'
 
 require_relative 'application'
-require_relative 'helpers/main_helper'
 require_relative 'controllers/snode_controller'
 require_relative 'controllers/tnode_controller'
+require_relative 'helpers/main_helper'
+require_relative 'models/environment_model'
 
 ##
 # Service Sinatra class
@@ -22,6 +23,8 @@ class Service < Sinatra::Base
 
   get '/' do
     @mode = 'choose'
+    @env = { tnode: EnvironmentModel.tnode?, 
+             snode: EnvironmentModel.snode? }
     erb :'/index/choose'
   end
 
