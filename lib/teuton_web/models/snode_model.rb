@@ -1,7 +1,7 @@
 
 require 'yaml'
 
-module SnodeUtils
+module SnodeModel
   ##
   # Get Snode report files from current directory
   # @return Array
