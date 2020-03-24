@@ -26,8 +26,12 @@ module TnodeModel
     test
   end
 
-  def self.get_config_data(id)
-    config = YAML.load_file(File.join(s2f(id), 'config.yaml'))
+  def self.read_config_data(id)
+    YAML.load_file(File.join(s2f(id), 'config.yaml'))
+  end
+
+  def self.read_resume_data(testname)
+    YAML.load_file(File.join('var', testname, 'resume.yaml'))
   end
 
   private_class_method def self.s2f(string)

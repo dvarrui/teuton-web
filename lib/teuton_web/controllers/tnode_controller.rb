@@ -20,42 +20,30 @@ module Sinatra
         end
 
         # Show filename on raw mode
-        app.get '/tnode/raw/:input' do
+        app.get '/tnode/raw/:id' do
           @mode = 'tnode'
-          a = s2f(params[:input])
-          content = File.read(a)
+          content = File.read(s2f(params[:id]))
           "<pre>#{content}</pre>"
         end
-        app.get '/tnode/cases/:input' do
+
+        app.get '/tnode/cases/:id' do
           @mode = 'tnode'
-          @test = { id: params[:input],
-                    testname: get_testname_from(params[:input]),
-                    dirpath: get_dirpath_from(params[:input]) }
-          @config = YAML.load_file(File.join(get_dirpath_from(params[:input]), 'config.yaml'))
+          @test = TnodeModel.find_test_by_id(params[:id])
+          @config = TnodeModel.read_config_data(params[:id])
           erb :"tnode/cases"
         end
 
-        app.get '/tnode/resume/:input' do
+        app.get '/tnode/resume/:id' do
           @mode = 'tnode'
-          dirpath = s2f(params[:input])
-          files = Dir.glob(File.join(dirpath, '**', '*.rb')) +
-                  Dir.glob(File.join(dirpath, '**', '*.yaml')) +
-                  Dir.glob(File.join(dirpath, '**', '*.md'))
-          @test = { id: params[:input],
-                    testname: File.basename(s2f(params[:input])),
-                    dirpath: dirpath }
-          testname = File.basename(s2f(params[:input]))
-          @resume = YAML.load_file(File.join('var', testname, 'resume.yaml'))
+          @test = TnodeModel.find_test_by_id(params[:id])
+          @resume = TnodeModel.read_resume_data(@test[:testname])
           erb :"tnode/resume"
         end
 
-        app.get '/tnode/params/:input' do
+        app.get '/tnode/params/:id' do
           @mode = 'tnode'
-          dirpath = s2f(params[:input])
-          @test = { id: params[:input],
-                    dirpath: dirpath }
-          testname = File.basename(s2f(params[:input]))
-          @resume = YAML.load_file(File.join('var', testname, 'resume.yaml'))
+          @test = TnodeModel.find_test_by_id(params[:id])
+          @resume = TnodeModel.read_resume_data(@test[:testname])
           erb :"tnode/params"
         end
 
