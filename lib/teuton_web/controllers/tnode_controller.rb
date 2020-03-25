@@ -33,38 +33,25 @@ module Sinatra
           erb :"tnode/cases"
         end
 
+        # Show filename on raw mode
+        app.get '/tnode/reports/:id' do
+          @mode = 'tnode'
+          @test = TnodeModel.find_test_by_id(params[:id])
+          erb :"tnode/reports"
+        end
+
         app.get '/tnode/resume/:id' do
           @mode = 'tnode'
           @test = TnodeModel.find_test_by_id(params[:id])
           @resume = TnodeModel.read_resume_data(@test[:testname])
-          erb :"tnode/resume"
+          erb :"tnode/resume/cases"
         end
 
         app.get '/tnode/params/:id' do
           @mode = 'tnode'
           @test = TnodeModel.find_test_by_id(params[:id])
           @resume = TnodeModel.read_resume_data(@test[:testname])
-          erb :"tnode/params"
-        end
-
-        # Show filename on raw mode
-        app.get '/tnode/reports/:input' do
-          @mode = 'tnode'
-          dirpath = s2f(params[:input])
-          files = Dir.glob(File.join(dirpath, '**', '*.rb')) +
-                  Dir.glob(File.join(dirpath, '**', '*.yaml')) +
-                  Dir.glob(File.join(dirpath, '**', '*.md'))
-          @test = { id: params[:input],
-                    dirpath: dirpath }
-          testname = File.basename(s2f(params[:input]))
-          dirpath = File.join('var', testname)
-          files = Dir.glob(File.join(dirpath, '*.txt')) +
-                  Dir.glob(File.join(dirpath, '*.json')) +
-                  Dir.glob(File.join(dirpath, '*.yaml'))
-          @reports = { testname: testname,
-                       dirpath: dirpath,
-                       files: files.sort }
-          erb :"tnode/reports"
+          erb :"tnode/resume/params"
         end
 
         # Show filename using YAML data

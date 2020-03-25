@@ -20,9 +20,17 @@ module TnodeModel
              testname: File.basename(dirpath),
              dirpath: dirpath,
              testfiles: files.sort }
+
     files = Dir.glob(File.join(dirpath, '**', '*.yaml')) +
             Dir.glob(File.join(dirpath, '**', '*.json'))
     test[:configfiles] = files.sort
+
+    dirpath = File.join('var', test[:testname])
+    files = Dir.glob(File.join(dirpath, '*.txt')) +
+            Dir.glob(File.join(dirpath, '*.json')) +
+            Dir.glob(File.join(dirpath, '*.yaml'))
+    test[:reportfiles] = files.sort
+
     test
   end
 
@@ -33,7 +41,9 @@ module TnodeModel
   end
 
   def self.read_resume_data(testname)
-    YAML.load_file(File.join('var', testname, 'resume.yaml'))
+    filename = File.join(File.join('var', testname, 'resume.yaml'))
+    return :none unless File.exist? filename
+    YAML.load_file(filename)
   end
 
   private_class_method def self.s2f(string)

@@ -17,13 +17,13 @@
   <div class="col-sm-6">
     <div class="panel panel-default">
       <div class="panel-heading">
-        <h3 class="panel-title">Output reports <span class="badge"><%=@reports[:files].size.to_s%> files</span></h3>
+        <h3 class="panel-title">Output reports <span class="badge"><%=@test[:reportfiles].size.to_s%> files</span></h3>
       </div>
       <div class="panel-body">
         <table class="table table-condensed">
           <tbody>
             <% list = {}
-               @reports[:files].each do |filepath|
+               @test[:reportfiles].each do |filepath|
                  i = { filename: File.basename(filepath),
                             filepath: filepath }
                  s = i[:filename].split('.')[0]
