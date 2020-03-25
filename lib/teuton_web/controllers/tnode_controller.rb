@@ -41,6 +41,14 @@ module Sinatra
           erb :"tnode/execute"
         end
 
+        app.get '/tnode/execute/:id/case/:case_id' do
+          @mode = 'tnode'
+          @test = TnodeModel.find_test_by_id(params[:id])
+          @cmd = "teuton run --cases=#{params[:case_id].to_i} --export=yaml #{s2f(params[:id])}"
+          @ok = system(@cmd)
+          erb :"tnode/execute"
+        end
+
         # Redirect to reports index
         app.get '/tnode/reports/:id' do
           redirect "/tnode/report/files/#{params[:id]}"

@@ -37,7 +37,9 @@
             <tr>
               <td><%= case_id %></td>
               <td><%=c[:tt_members]%></td>
-              <td><span class="label label-primary">Execute <%= case_id%></span></td>
+              <td><a href="/tnode/execute/<%=@test[:id]%>/case/<%=case_id%>">
+                <span class="label label-primary">Execute <%= case_id%></span>
+              </a></td>
             </tr>
             <% end %>
           </tbody>

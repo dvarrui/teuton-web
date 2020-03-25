@@ -29,17 +29,30 @@ module TnodeModel
     files = Dir.glob(File.join(dirpath, '*.txt')) +
             Dir.glob(File.join(dirpath, '*.json')) +
             Dir.glob(File.join(dirpath, '*.yaml'))
-    test[:reportfiles] = files.sort
-
+    test[:reportfiles] = []
+    files.sort.each do |filepath|
+      item = { filename: File.basename(filepath),
+               filepath: filepath,
+               timestamp: get_timestamp(filepath) }
+      test[:reportfiles] << item
+    end
     test[:exist] = { configyaml: false, resumeyaml: false }
 
     a = test[:configfiles].select { |i| i.include?('config.yaml') }
     test[:exist][:configyaml] = true if a.size.positive?
 
-    a = test[:reportfiles].select { |i| i.include?('resume.yaml') }
+    a = test[:reportfiles].select { |i| i[:filename].include?('resume.yaml') }
     test[:exist][:resumeyaml] = true if a.size.positive?
 
     test
+  end
+
+  def self.get_timestamp(filepath)
+    stat = File.stat(filepath).ctime
+    ctime = { year: stat.year, month: stat.month, day: stat.day,
+              hour: stat.hour, min: stat.min, sec: stat.sec }
+    timestamp = format("%<year>04d-%<month>02d-%<day>02d %<hour>02d:%<min>02d:%<sec>02d", ctime)
+    return timestamp
   end
 
   def self.read_config_data(id)

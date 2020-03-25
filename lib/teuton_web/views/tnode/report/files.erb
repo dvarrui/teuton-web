@@ -19,7 +19,7 @@
 </div>
 
 <div class="row">
-  <div class="col-sm-6">
+  <div class="col-sm-10">
     <div class="panel panel-default">
       <div class="panel-heading">
         <h3 class="panel-title">Output reports <span class="badge"><%=@test[:reportfiles].size.to_s%> files</span></h3>
@@ -28,14 +28,12 @@
         <table class="table table-condensed">
           <tbody>
             <% list = {}
-               @test[:reportfiles].each do |filepath|
-                 i = { filename: File.basename(filepath),
-                            filepath: filepath }
-                 s = i[:filename].split('.')[0]
+               @test[:reportfiles].each do |item|
+                 s = item[:filename][0,7]
                  if list[s].nil?
-                   list[s] = [i]
+                   list[s] = [item]
                  else
-                   list[s] << i
+                   list[s] << item
                  end
                end %>
             <% list.each_value do |items| %>
@@ -43,6 +41,7 @@
               <% items.each do |item| %>
               <td>
               <a href="/tnode/raw/<%=f2s(item[:filepath])%>"><%=item[:filename]%></a>
+              (<%=item[:timestamp]%>)
               </td>
               <% end %>
             </tr>
