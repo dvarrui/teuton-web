@@ -1,11 +1,17 @@
 
 <div class="page-header">
-  <h2><%= @test[:dirpath] %></h2>
-  <p><a href="/tnode">Back</a> |
+  <h2>Test: <%= @test[:dirpath] %></h2>
+  <p><a href="/tnode">Choose test</a> |
      <a href="/tnode/files/<%= @test[:id] %>">Files</a> |
      Cases |
      <a href="/tnode/reports/<%= @test[:id] %>">Reports</a>
   </p>
+  <% unless @test[:exist][:configyaml] %>
+  <p><span class="label label-default">WARN:</span> config.yaml not found!</p>
+  <% end %>
+  <% if @config[:cases].size.zero? %>
+  <p><span class="label label-default">WARN:</span> No case defined into config.yaml!</p>
+  <% end %>
 </div>
 
 <div class="row">
@@ -26,10 +32,7 @@
 
           <tbody>
             <% @config[:cases].each_with_index do |c, index| %>
-            <% filename = File.join('var', @test[:testname],
-                                    "case-#{c[:id]}.yaml")
-               case_id = format('%02d', (index+1))
-            %>
+            <% case_id = format('%02d', (index+1)) %>
             <tr>
               <td><%= case_id %></td>
               <td><%=c[:tt_members]%></td>

@@ -1,8 +1,8 @@
 
 <div class="page-header">
   <h2>Tests list</h2>
-  <p><b>Directory:</b> <span class="label label-default"><%= Dir.pwd %></span></p>
-  <p>Choose test... <span class="badge"><%= @tests.size.to_s%></span></p>
+  <p><b>Choose test...</b> </p>
+  <p>Current directory: <span class="label label-default"><%= Dir.pwd %></span></p>
 </div>
 
 <div class="row">
@@ -17,14 +17,14 @@
         <table class="table table-condensed">
           <thead>
             <tr>
-              <td><span class="label label-default">Test</span></td>
+              <td><span class="label label-default">Tests</span> <span class="badge"><%= @tests.size.to_s%></span></td>
             </tr>
           </thead>
           <tbody>
             <% @tests.each_with_index do |filepath, index| %>
               <tr>
                 <td>
-                  <%= (index+1) %>. 
+                  <%= (index+1) %>.
                   <a href="/tnode/files/<%=f2s(filepath)%>"><b><%=filepath%></b></a>
                 </td>
               </tr>

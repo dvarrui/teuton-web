@@ -31,6 +31,14 @@ module TnodeModel
             Dir.glob(File.join(dirpath, '*.yaml'))
     test[:reportfiles] = files.sort
 
+    test[:exist] = { configyaml: false, resumeyaml: false }
+
+    a = test[:configfiles].select { |i| i.include?('config.yaml') }
+    test[:exist][:configyaml] = true if a.size.positive?
+
+    a = test[:reportfiles].select { |i| i.include?('resume.yaml') }
+    test[:exist][:resumeyaml] = true if a.size.positive?
+
     test
   end
 

@@ -33,25 +33,30 @@ module Sinatra
           erb :"tnode/cases"
         end
 
-        # Show filename on raw mode
+        # Redirect to reports index
         app.get '/tnode/reports/:id' do
-          @mode = 'tnode'
-          @test = TnodeModel.find_test_by_id(params[:id])
-          erb :"tnode/reports"
+          redirect "/tnode/report/files/#{params[:id]}"
         end
 
-        app.get '/tnode/resume/:id' do
+        # Show report file list
+        app.get '/tnode/report/files/:id' do
+          @mode = 'tnode'
+          @test = TnodeModel.find_test_by_id(params[:id])
+          erb :"tnode/report/files"
+        end
+
+        app.get '/tnode/report/resume_cases/:id' do
           @mode = 'tnode'
           @test = TnodeModel.find_test_by_id(params[:id])
           @resume = TnodeModel.read_resume_data(@test[:testname])
-          erb :"tnode/resume/cases"
+          erb :"tnode/report/resume_cases"
         end
 
-        app.get '/tnode/params/:id' do
+        app.get '/tnode/report/resume_params/:id' do
           @mode = 'tnode'
           @test = TnodeModel.find_test_by_id(params[:id])
           @resume = TnodeModel.read_resume_data(@test[:testname])
-          erb :"tnode/resume/params"
+          erb :"tnode/report/resume_params"
         end
 
         # Show filename using YAML data
@@ -59,7 +64,7 @@ module Sinatra
           @mode = 'tnode'
           @testpath = params[:testpath]
           @data = YAML.load_file(s2f(params[:filename]))
-          erb :"tnode/case/targets"
+          erb :"tnode/report/targets"
         end
       end
     end
