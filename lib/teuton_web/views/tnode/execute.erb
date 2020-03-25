@@ -1,0 +1,16 @@
+
+<div class="page-header">
+  <h2>Test: <%= @test[:dirpath] %></h2>
+  <p><a href="/tnode">Choose test</a> |
+     <a href="/tnode/files/<%= @test[:id] %>">Files</a> |
+     <a href="/tnode/files/<%= @test[:id] %>">Cases</a> |
+     Execute |
+     <a href="/tnode/reports/<%= @test[:id] %>">Reports</a>
+  </p>
+  <p>Command executed: <b><%= @cmd %></b></p>
+  <% if @ok %>
+  <p>Result: <span class="label label-primary">OK</p>
+  <% else %>
+  <p>Result: <span class="label label-danger">ERROR</span> (Revise logs)</p>
+  <% end %>
+</div>

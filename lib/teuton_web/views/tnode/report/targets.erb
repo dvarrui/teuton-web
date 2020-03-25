@@ -1,9 +1,9 @@
 
 <div class="page-header">
-  <h2>Targets: <%= @data[:config][:tt_members]%></h2>
-  <p>Directory: <span class="label label-default"><%= Dir.pwd %></span></p>
+  <h2>Test: <%= @test[:dirpath]%></h2>
+  <p>Case: <b><%= @data[:config][:tt_members]%></b></p>
   <p>
-    <a href="/tnode/resume/<%=@testpath%>">Back</a> |
+    <a href="/tnode/report/resume_cases/<%=@test[:id]%>">Back</a> |
     <a href="/tnode/raw/<%=params[:filename]%>">Raw</a> |
     <a href="/snode/report/<%=params[:filename]%>/config">Config</a> |
     <a href="/snode/report/<%=params[:filename]%>/results">Results</a> |

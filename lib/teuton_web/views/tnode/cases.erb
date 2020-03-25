@@ -4,6 +4,7 @@
   <p><a href="/tnode">Choose test</a> |
      <a href="/tnode/files/<%= @test[:id] %>">Files</a> |
      Cases |
+     <a href="/tnode/execute/<%= @test[:id] %>/all">Execute</a> |
      <a href="/tnode/reports/<%= @test[:id] %>">Reports</a>
   </p>
   <% unless @test[:exist][:configyaml] %>
@@ -26,7 +27,7 @@
             <tr>
               <td><span class="label label-default">Case</span></td>
               <td><span class="label label-default">Members</span></td>
-              <td><span class="label label-primary">Execute ALL</span></td>
+              <td><a href="/tnode/execute/<%=@test[:id]%>/all"><span class="label label-primary">Execute ALL</span></a></td>
             </tr>
           </thead>
 

@@ -33,6 +33,14 @@ module Sinatra
           erb :"tnode/cases"
         end
 
+        app.get '/tnode/execute/:id/all' do
+          @mode = 'tnode'
+          @test = TnodeModel.find_test_by_id(params[:id])
+          @cmd = "teuton run --export=yaml #{s2f(params[:id])}"
+          @ok = system(@cmd)
+          erb :"tnode/execute"
+        end
+
         # Redirect to reports index
         app.get '/tnode/reports/:id' do
           redirect "/tnode/report/files/#{params[:id]}"
@@ -60,9 +68,9 @@ module Sinatra
         end
 
         # Show filename using YAML data
-        app.get '/tnode/test/:testpath/case/:filename/targets' do
+        app.get '/tnode/test/:id/case/:filename/targets' do
           @mode = 'tnode'
-          @testpath = params[:testpath]
+          @test = TnodeModel.find_test_by_id(params[:id])
           @data = YAML.load_file(s2f(params[:filename]))
           erb :"tnode/report/targets"
         end
