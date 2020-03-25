@@ -4,9 +4,7 @@
   <p><a href="/tnode">Back</a> |
      Files |
      <a href="/tnode/cases/<%= @test[:id] %>">Cases</a> |
-     <a href="/tnode/reports/<%= @test[:id] %>">Reports</a> |
-     <a href="/tnode/resume/<%= @test[:id] %>">Resume</a> |
-     <a href="/tnode/params/<%= @test[:id] %>">Params</a>
+     <a href="/tnode/reports/<%= @test[:id] %>">Reports</a>
   </p>
 </div>
 
@@ -52,11 +50,7 @@
             <tr>
               <td>
                 <a href="/tnode/raw/<%=f2s(filepath)%>">
-                  <td>
-                    <a href="/tnode/raw/<%=f2s(filepath)%>">
-                      <span class="label label-primary"><%=filepath[@test[:dirpath].size + 1,filepath.size]%></span>
-                    </a>
-                  </td>
+                  <span class="label label-primary"><%=filepath[@test[:dirpath].size + 1,filepath.size]%></span>
                 </a>
               </td>
             </tr>

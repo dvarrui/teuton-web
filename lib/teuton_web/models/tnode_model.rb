@@ -27,7 +27,9 @@ module TnodeModel
   end
 
   def self.read_config_data(id)
-    YAML.load_file(File.join(s2f(id), 'config.yaml'))
+    filename = File.join(s2f(id), 'config.yaml')
+    return { cases: [] } unless File.exist? filename
+    YAML.load_file(filename)
   end
 
   def self.read_resume_data(testname)
